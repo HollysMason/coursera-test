@@ -1,16 +1,25 @@
 (function () {
-"use strict"
+  "use strict"
 
-angular.module("myFirstApp", [])
+angular.module("NameCalculator", [])
 
-.controller("myFirstController", function ($scope) {
-    $scope.name = "Vlad";
-    $scope.sayHello = function() {
-      return "Hello my name is" + $scope.name;
-    };
-    $scope.countOfMarks = function() {
-      return $scope.name.length;
+.controller("NameCalculatorController", function ($scope) {
+  $scope.name = "";
+  $scope.totalValue = 0;
+
+  $scope.displayNumeric = function () {
+    var totaNameValue = calculateNumericForSctring($scope.name);
+    $scope.totalValue = totaNameValue;
+  };
+
+  function calculateNumericForSctring(string) {
+    var totaStringValue = 0;
+    for (var i = 0; i < string.length; i++) {
+      totaStringValue += string.charCodeAt(i);
     }
+
+    return totaStringValue;
+  }
 });
 
-})();
+})()
