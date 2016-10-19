@@ -1,25 +1,60 @@
+// (function () {
+//   'use strict';
+//
+//
+//   // .controller('DIController', 'MsgController', ['$scope', '$filter', DIController])
+//   //
+//   // function DIController($scope, $filter) {
+//   //   $scope.name = "Vlad";
+//   //
+//   //   $scope.upper = function () {
+//   //     var upCase = $filter('uppercase');
+//   //     $scope.name = upCase($scope.name);
+//   //   }
+//   // }
+//
+//   angular.module('DIApp', [])
+//   .controller("MsgController", MsgController)
+//
+//   MsgController.$inject = ['$scope'];
+//   function MsgController($scope) {
+//     $scope.name = "Vlad";
+//     $scope.picture = "wayne";
+//
+//     $scope.sayMessage = function () {
+//       return "Hello syka"
+//     };
+//     $scope.showWhoIsThis = function () {
+//       $scope.picture = "batman";
+//     }
+//
+//   }
+// })();
 (function () {
-  "use strict"
+  'use sctrict';
 
-angular.module("NameCalculator", [])
+  angular.module('DIApp', [])
 
-.controller("NameCalculatorController", function ($scope) {
-  $scope.name = "";
-  $scope.totalValue = 0;
+  .controller('CountFoodController', CountFoodController);
+  CountFoodController.$inject = ['$scope'];
 
-  $scope.displayNumeric = function () {
-    var totaNameValue = calculateNumericForSctring($scope.name);
-    $scope.totalValue = totaNameValue;
-  };
+  function CountFoodController ($scope) {
+    $scope.food = "";
+    $scope.message = "";
 
-  function calculateNumericForSctring(string) {
-    var totaStringValue = 0;
-    for (var i = 0; i < string.length; i++) {
-      totaStringValue += string.charCodeAt(i);
-    }
+    $scope.countFood = function () {
+      if ($scope.food === "") {
+         $scope.message = "Please enter data first";
+         return;
+      }
+      var arrOfFood = $scope.food.split(',');
 
-    return totaStringValue;
+      if (arrOfFood.length <= 3) {
+        $scope.message = "Enjoy!";
+      } else if (arrOfFood.length > 3) {
+        $scope.message = "Too much!";
+      }
+
+    };
   }
-});
-
-})()
+})();
