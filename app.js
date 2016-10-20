@@ -1,39 +1,60 @@
 (function () {
   'use sctrict';
 
-  angular.module('Filterts', [])
-  .controller('CustomFilter', CustomFilter)
-  .filter('loves', LovesFilter)
-  .filter('truth', TruthFilter);
+  angular.module('CounterApp', [])
+  .controller('CounterController', CounterController)
+  .controller('secondCounter', secondCounter);
+  secondCounter.$inject = ['$scope', '$timeout'];
+  CounterController.$inject = ['$scope'];
 
-  CustomFilter.$inject = ['$scope', 'lovesFilter'];
+  function secondCounter($scope, $timeout) {
+    $scope.counter = 0;
 
-  function CustomFilter($scope, lovesFilter) {
-    $scope.test = "test";
-    $scope.sayMessage = function () {
-      var msg = "I like JavaScript language";
-      return msg;
-    };
-      $scope.sayLoveMessage = function () {
-      var msg = "I like JavaScript language";
-      msg = lovesFilter(msg);
-      return msg;
+    $scope.increment = function () {
+      // (3) verik - best varik
+      $timeout(function () {
+        $scope.counter++;
+        console.log('incremented!');
+      }, 2000);
+      // (2) varik - norm varik no ne good
+      // setTimeout(function () {
+      //   $scope.$apply(function() {
+      //     $scope.counter++;
+      //     console.log("incremented!");
+      //   });
+      // (1) varik - bad varik
+        // $scope.counter++;
+        // console.log("incremented!");
+        // $scope.$digest()
+      // }, 2000);
     };
   }
 
-  function LovesFilter() {
-    return function (input) {
-      input = input || "";
-      input = input.replace('like', 'love');
-      return input;
-    };
-  }
+  function CounterController($scope) {
+    $scope.onceCounter = 0;
+    $scope.counter = 0;
 
-  function TruthFilter() {
-    return function (input, target, replace) {
-      input = input || "";
-      input = input.replace(target, replace);
-      return input;
+    $scope.showNumberOfWatchers = function () {
+        console.log("# of watchers: ", $scope.$$watchersCount);
+        console.log($scope);
     };
+
+    $scope.countOnce = function () {
+      $scope.onceCounter = 1;
+    };
+
+    $scope.upCounter = function() {
+      $scope.counter++;
+    };
+
+    // $scope.$watch('onceCounter', function (newValue, oldValue) {
+    //   console.log("old value: ", newValue);
+    //   console.log("new value: ", oldValue);
+    // });
+    //
+    // $scope.$watch('upCounter', function (newValue, oldValue) {
+    //   console.log("counter old value: ", newValue);
+    //   console.log("counter new value: ", oldValue);
+    // });
   }
 })();

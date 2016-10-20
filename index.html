@@ -7,14 +7,22 @@
     <script src="app.js"></script>
     <title>My first AngularJS APP</title>
   </head>
-  <body ng-app="Filterts">
-    <div ng-controller="CustomFilter">
-      {{test}}<br>
-      Original: {{ sayMessage() }}<br>
-      Changed: {{ sayLoveMessage() }}<br>
-      Truth: {{ sayLoveMessage() | truth : 'language' : 'programing language' }}<br>
-      Loves: {{ sayMessage() | loves }}<br>
-      more than one filter: {{ sayLoveMessage() | truth : 'language' : 'programing language' | uppercase}}
+  <body ng-app="CounterApp">
+    <h1>The Digest Cycle</h1>
+    <div ng-controller="CounterController">
+      <button ng-click="showNumberOfWatchers()">Log # of Watchers</button>
+      <div>
+        <button ng-click="countOnce()">Up Once Counter</button>
+        <button ng-click="upCounter()">increment</button>
+      </div>
+      <div>
+        Once counter: {{ onceCounter }}<br>
+        REgular counter: {{ counter }}
+      </div>
+    </div>
+    <div ng-controller="secondCounter">
+      <button ng-click="increment()">increment</button>
+      Count of counter: {{counter}}
     </div>
   </body>
 </html>
