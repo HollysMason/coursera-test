@@ -1,61 +1,38 @@
-// (function () {
-//   'use sctrict';
-//
-//   angular.module('FirstTask', [])
-//
-//   .controller('CountFoodController', CountFoodController);
-//   CountFoodController.$inject = ['$scope', '$filter'];
-//
-//   function CountFoodController ($scope, $filter) {
-//     $scope.food = "";
-//     $scope.message = "";
-//     $scope.cost = .45;
-//     $scope.blah = "Cookie ";
-//     $scope.sayMessage = function () {
-//       return $filter('uppercase')("the anser is" + $filter('currency')(42, " pidor ", 28));
-//     }
-//     $scope.countFood = function () {
-//       if ($scope.food === "") {
-//          $scope.message = "Please enter data first";
-//          return;
-//       }
-//       var arrOfFood = $scope.food.split(',');
-//
-//       if (arrOfFood.length <= 3) {
-//         $scope.message = "Enjoy!";
-//       } else if (arrOfFood.length > 3) {
-//         $scope.message = "Too much!";
-//       }
-//
-//     };
-//   }
-// })();
 (function () {
-  angular.module('FirstTask', [])
-  .controller('customFilterTest', customFilterTest)
-  // (2) registrate custom filter function
-  .filter('love', lovesFilter);
+  'use sctrict';
 
-  customFilterTest.$inject = ['$scope', 'lovesFilter'];//(3)add custom filter to inject ??
+  angular.module('Filterts', [])
+  .controller('CustomFilter', CustomFilter)
+  .filter('loves', LovesFilter)
+  .filter('truth', TruthFilter);
 
+  CustomFilter.$inject = ['$scope', 'lovesFilter'];
 
-  function customFilterTest($scope, lovesFilter) { // (4) don't forget about adding parameters
+  function CustomFilter($scope, lovesFilter) {
+    $scope.test = "test";
     $scope.sayMessage = function () {
-      var msg = "I love JavaScript language";
+      var msg = "I like JavaScript language";
       return msg;
     };
-    $scope.name = " hui";
-    $scope.sayLovesMessage = function () {
-      var msg = "I love JavaScript language";
+      $scope.sayLoveMessage = function () {
+      var msg = "I like JavaScript language";
       msg = lovesFilter(msg);
       return msg;
     };
   }
-  // (1) create custom filter function
-  function lovesFilter() {
+
+  function LovesFilter() {
     return function (input) {
       input = input || "";
-      input = input.replace('love', 'like');
+      input = input.replace('like', 'love');
+      return input;
+    };
+  }
+
+  function TruthFilter() {
+    return function (input, target, replace) {
+      input = input || "";
+      input = input.replace(target, replace);
       return input;
     };
   }

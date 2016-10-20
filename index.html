@@ -7,21 +7,14 @@
     <script src="app.js"></script>
     <title>My first AngularJS APP</title>
   </head>
-  <body ng-app="FirstTask">
-      <!-- <h1>first task</h1>
-      <div ng-controller="CountFoodController">
-        <input type="text" ng-model="food">
-        <button ng-click="countFood();">Check If Too Much</button><br>
-        {{message}}
-        {{cost | currency : blah : 5}}
-        <br>
-        {{sayMessage();}}
-      </div> -->
-      <div ng-controller="customFilterTest">
-        Original:{{sayMessage()}}<br>
-        LovesMessage:{{sayLovesMessage()}}
-        <br>
-        {{name}}
-      </div>
+  <body ng-app="Filterts">
+    <div ng-controller="CustomFilter">
+      {{test}}<br>
+      Original: {{ sayMessage() }}<br>
+      Changed: {{ sayLoveMessage() }}<br>
+      Truth: {{ sayLoveMessage() | truth : 'language' : 'programing language' }}<br>
+      Loves: {{ sayMessage() | loves }}<br>
+      more than one filter: {{ sayLoveMessage() | truth : 'language' : 'programing language' | uppercase}}
+    </div>
   </body>
 </html>
