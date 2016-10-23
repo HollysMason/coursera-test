@@ -7,22 +7,27 @@
     <script src="app.js"></script>
     <title>My first AngularJS APP</title>
   </head>
-  <body ng-app="CounterApp">
-    <h1>The Digest Cycle</h1>
-    <div ng-controller="CounterController">
-      <button ng-click="showNumberOfWatchers()">Log # of Watchers</button>
-      <div>
-        <button ng-click="countOnce()">Up Once Counter</button>
-        <button ng-click="upCounter()">increment</button>
-      </div>
-      <div>
-        Once counter: {{ onceCounter }}<br>
-        REgular counter: {{ counter }}
-      </div>
-    </div>
-    <div ng-controller="secondCounter">
-      <button ng-click="increment()">increment</button>
-      Count of counter: {{counter}}
+  <body ng-app="ShoppingListAPP">
+    <h1>ng-repeat</h1>
+    <div ng-controller="ShoppingListController">
+      <h3>Shopping list:</h3>
+      <input type="text" ng-model="search" placeholder="search">
+      <ul>
+        <li ng-repeat="item in shoppingList1 | filter : search">{{item}}</li>
+      </ul>
+      <br>
+      <h3>Shopping list 2:</h3>
+      <input type="text" ng-model="shoppingList2[0].quantity">
+      <ul>
+        <li ng-repeat="item in shoppingList2">Buy {{item.quantity}} of {{item.name}}(s)</li>
+      </ul>
+      <input type="text" ng-model="newItemName" placeholder="item name">
+      <input type="text" ng-model="newItemQuantity" placeholder=" item quantity">
+      <button ng-click="addToList()">Add item</button>
+      <h3>more example</h3>
+      <ul>
+        <li ng-repeat="i in shoppingList2"> {{ $index + 1 }} Buy {{item.quantity}} of {{item.name}}(s)</li>
+      </ul>
     </div>
   </body>
 </html>
