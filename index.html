@@ -7,27 +7,20 @@
     <script src="app.js"></script>
     <title>My first AngularJS APP</title>
   </head>
-  <body ng-app="ShoppingListAPP">
-    <h1>ng-repeat</h1>
-    <div ng-controller="ShoppingListController">
-      <h3>Shopping list:</h3>
-      <input type="text" ng-model="search" placeholder="search">
-      <ul>
-        <li ng-repeat="item in shoppingList1 | filter : search">{{item}}</li>
-      </ul>
-      <br>
-      <h3>Shopping list 2:</h3>
-      <input type="text" ng-model="shoppingList2[0].quantity">
-      <ul>
-        <li ng-repeat="item in shoppingList2">Buy {{item.quantity}} of {{item.name}}(s)</li>
-      </ul>
-      <input type="text" ng-model="newItemName" placeholder="item name">
-      <input type="text" ng-model="newItemQuantity" placeholder=" item quantity">
-      <button ng-click="addToList()">Add item</button>
-      <h3>more example</h3>
-      <ul>
-        <li ng-repeat="i in shoppingList2"> {{ $index + 1 }} Buy {{item.quantity}} of {{item.name}}(s)</li>
-      </ul>
-    </div>
+  <body ng-app="ControllerAsApp">
+     <h1>Controller As Syntax</h1>
+     <!-- <div ng-controller="ParentController1">
+       <div ng-controller="ChildController1">
+       </div>
+     </div> -->
+
+     <div ng-controller="ParentController2 as parent">
+       Parent Value: {{ parent.value }}
+
+       <div ng-controller='ChildController2 as child'>
+         Child value: {{ child.value }}<br>
+         Parent value: {{ parent.value }}
+       </div>
+     </div>
   </body>
 </html>
