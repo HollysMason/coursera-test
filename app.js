@@ -4,47 +4,44 @@
   angular.module('ShoppingListCheckOff', [])
   .controller('ToBuyController', ToBuyController)
   .controller('AlreadyBoughtController', AlreadyBoughtController)
-  .factory('ShoppingListCheckOffFactory', ShoppingListCheckOffFactory);
+  .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
-  ToBuyController.$inject = ['ShoppingListCheckOffFactory'];
-  function ToBuyController(ShoppingListCheckOffFactory) {
+  ToBuyController.$inject = ['ShoppingListCheckOffService'];
+  function ToBuyController(ShoppingListCheckOffService) {
     var list1 = this;
 
-    var shoppingList = ShoppingListCheckOffFactory();
-
-    list1.items = shoppingList.getItems();
+    list1.items = ShoppingListCheckOffService.getItems();
 
     list1.name = "";
     list1.quantity = "";
 
     list1.addItem = function (name, quantity) {
-      shoppingList.addItem(list1.name, list1.quantity);
+      ShoppingListCheckOffService.addItem(list1.name, list1.quantity);
     };
 
     list1.bought = function (itemIndex) {
-      shoppingList.bought(itemIndex);
+      ShoppingListCheckOffService.bought(itemIndex);
     };
   }
 
-  AlreadyBoughtController.$inject = ['ShoppingListCheckOffFactory'];
-  function AlreadyBoughtController(ShoppingListCheckOffFactory) {
+  AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
+  function AlreadyBoughtController(ShoppingListCheckOffService) {
     var list2 = this;
 
-    var shoppingList = ShoppingListCheckOffFactory();
-
-    list2.items = shoppingList.getItems();
-
-
+    list2.items = ShoppingListCheckOffService.getItemsBought();
   }
 
   function ShoppingListCheckOffService() {
     var service = this;
 
-    var itemsToBuy = [];
+    var itemsToBuy = [{nameItem: 'cookies', quantity: 10},
+                          {nameItem: 'chips', quantity: 20},
+                          {nameItem: 'choclate', quantity: 374},
+                          {nameItem: 'eggs', quantity: 526},];
 
     var itemsBought = [];
 
-    service.itemsBought = [];
+
 
     service.addItem = function (name, quantity) {
       var item = {
@@ -55,9 +52,8 @@
     }
 
     service.bought = function (itemIndex) {
-      itemsToBuy.splice(itemIndex, 1);
       itemsBought.push(itemsToBuy[itemIndex]);
-      console.log(itemsBought);
+      itemsToBuy.splice(itemIndex, 1);
     };
 
     service.getItems = function () {
@@ -70,10 +66,4 @@
 
   }
 
-  function ShoppingListCheckOffFactory () {
-    var factory = function () {
-      return new ShoppingListCheckOffService();
-    };
-    return factory;
-  }
 })()

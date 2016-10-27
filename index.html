@@ -10,7 +10,6 @@
   <body>
     <div ng-controller="ToBuyController as list1">
       <h3>To Buy</h3>
-      <!-- <h4>Everything is bought</h4> -->
       <input type="text" ng-model="list1.name" placeholder="name">
       <input type="text" ng-model="list1.quantity" placeholder="qunatity">
       <button ng-click="list1.addItem();">Add Item</button>
@@ -20,18 +19,16 @@
           <button ng-click="list1.bought($index);">Bought</button>
         </li>
       </ol>
+      <h4 ng-if="!list1.items.length">Everything is bought</h4>
     </div>
-
     <div ng-controller="AlreadyBoughtController as list2">
-      <h3>Already Boughtc</h3>
-      <!-- <h4>Nothing bought yet</h4> -->
-
+      <h3>Already Bought</h3>
+      <h4 ng-if="!list2.items.length">Nothing bought yet</h4>
       <ol>
         <li ng-repeat="item in list2.items">
-          {{item.nameItem}} {{item.quantity}}
+          Bought {{item.nameItem}} of {{item.quantity}}
         </li>
       </ol>
     </div>
-
   </body>
 </html>
