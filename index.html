@@ -1,28 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='ShoppingListCheckOff'>
   <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="img-icon\angularjs-2.png" type="image/x-icon">
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
-    <title>My first AngularJS APP</title>
+    <link rel="stylesheet" href="style.css" media="screen" title="no title">
+    <title>Custom Service</title>
   </head>
-  <body ng-app="ShoppingListApp">
-    <h1>Custom Service</h1>
-    <div ng-controller="ShoppingListAddController as itemAdder">
-      <input type="text" ng-model="itemAdder.itemName" placeholder="item name">
-      <input type="text" ng-model="itemAdder.itemQuantity" placeholder="quantity">
-      <button ng-click="itemAdder.addItem();">Add item to shopping list</button>
-    </div>
-    <div ng-controller="ShoppingListShowController as showList">
+  <body>
+    <div ng-controller="ToBuyController as list1">
+      <h3>To Buy</h3>
+      <!-- <h4>Everything is bought</h4> -->
+      <input type="text" ng-model="list1.name" placeholder="name">
+      <input type="text" ng-model="list1.quantity" placeholder="qunatity">
+      <button ng-click="list1.addItem();">Add Item</button>
       <ol>
-        <li ng-repeat="item in showList.items">{{item.quantity}} of {{item.name}}
-          <button ng-click="showList.removeItem($index);">Remove item</button>
-          <input type="text" ng-model="::showList.newItemName" placeholder="change name">
-          <input type="text" ng-model="::showList.newItemQuantity" placeholder="change quantity">
-          <button ng-click="showList.change($index, showList.newItemName, showList.newItemQuantity);">Change data</button>
+        <li ng-repeat="item in list1.items">
+          Buy {{item.nameItem}} of {{item.quantity}}
+          <button ng-click="list1.bought($index);">Bought</button>
         </li>
       </ol>
     </div>
+
+    <div ng-controller="AlreadyBoughtController as list2">
+      <h3>Already Boughtc</h3>
+      <!-- <h4>Nothing bought yet</h4> -->
+
+      <ol>
+        <li ng-repeat="item in list2.items">
+          {{item.nameItem}} {{item.quantity}}
+        </li>
+      </ol>
+    </div>
+
   </body>
 </html>
